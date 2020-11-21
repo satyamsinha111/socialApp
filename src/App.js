@@ -44,16 +44,44 @@ const App = ({authState}) => {
   };
 
   useEffect(() => {
+    console.log('Props', authState);
     requestPermission();
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber;
   }, []);
 
+  if (authState.loading) {
+    return <EmptyContainer />;
+  }
+
   return (
-    <View>
-      <Text>Helloworld</Text>
-    </View>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator
+          screenOptions={{
+            header: (props) => {
+              return <CustomHeader {...props} />;
+            },
+          }}>
+          {authState.isAuthenticated ? (
+            <>
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="AddPost" component={AddPost} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="Signin" component={Signin} />
+              <Stack.Screen name="Signup" component={Signup} />
+            </>
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  authState: state.auth,
+});
+
+export default connect(mapStateToProps)(App);
