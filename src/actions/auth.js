@@ -63,10 +63,9 @@ export const signIn = (data) => async (dispatch) => {
 };
 
 export const signOut = () => async (dispatch) => {
-  auth
+  auth()
     .signOut()
     .then((data) => {
-      console.error(error);
       Snackbar.show({
         text: 'Signed out',
         textColor: '#fff',
