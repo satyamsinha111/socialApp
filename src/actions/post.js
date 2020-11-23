@@ -4,7 +4,7 @@ import {SET_POST, ERROR_POST} from './action.type';
 export const getPosts = (data) => async (dispatch) => {
   try {
     database()
-      .ref('/users/')
+      .ref('/posts/')
       .on('value', (snapshot) => {
         console.log(snapshot.val());
         if (snapshot.val()) {
