@@ -10,10 +10,15 @@ import {
   Left,
   Body,
   Right,
+  Form,
+  Item,
+  Input,
+  Label,
 } from 'native-base';
 import database from '@react-native-firebase/database';
+import shortid from 'shortid';
 
-const Post = ({item, userDetails}) => {
+const Post = ({item, userDetails, navigation}) => {
   const [upvote, setUpvote] = useState(0);
   const [downvote, setDownvote] = useState(0);
 
@@ -125,6 +130,15 @@ const Post = ({item, userDetails}) => {
               }}>
               {downvote}
             </Text>
+          </Button>
+          <Button
+            transparent
+            onPress={() =>
+              navigation.navigate('CommentList', {
+                id: item.id,
+              })
+            }>
+            <Icon name="chatbubbles" style={{fontSize: 20, color: '#fdcb9e'}} />
           </Button>
         </Left>
         <Right>

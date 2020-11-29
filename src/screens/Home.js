@@ -7,7 +7,7 @@ import {getPosts} from '../actions/post';
 import EmptyContainer from '../components/EmptyContainer';
 import Post from '../components/Post';
 
-const Home = ({getPosts, postState, userDetails}) => {
+const Home = ({getPosts, postState, userDetails, navigation}) => {
   useEffect(() => {
     getPosts();
   }, []);
@@ -22,7 +22,12 @@ const Home = ({getPosts, postState, userDetails}) => {
         data={postState.posts}
         keyExtractor={(item) => item.id}
         renderItem={({item, index, seperators}) => (
-          <Post item={item} userDetails={userDetails} key={item.id} />
+          <Post
+            navigation={navigation}
+            item={item}
+            userDetails={userDetails}
+            key={item.id}
+          />
         )}
         ListEmptyComponent={() => (
           <Container style={styles.emptyContainer}>

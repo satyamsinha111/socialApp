@@ -9,6 +9,7 @@ import AddPost from './screens/AddPost';
 import Signin from './screens/Signin';
 import Signup from './screens/Signup';
 import Home from './screens/Home';
+import CommentList from './screens/CommentList';
 import CustomHeader from './layout/CustomHeader';
 import {SET_USER, IS_AUTHENTICATED} from './actions/action.type';
 import database from '@react-native-firebase/database';
@@ -67,6 +68,13 @@ const App = ({authState}) => {
             <>
               <Stack.Screen name="Home" component={Home} />
               <Stack.Screen name="AddPost" component={AddPost} />
+              <Stack.Screen
+                options={{
+                  headerShown: false,
+                }}
+                name="CommentList"
+                component={CommentList}
+              />
             </>
           ) : (
             <>
